@@ -15,11 +15,23 @@ class UserRepos extends React.Component {
   render() {
     const repos = this.props.userRepos
     const user = this.props.match.params.user
-    if (!repos)
-      return <div>Loading user repositories...</div>
-  
-    const list = repos.map(repo => <li key={repo.id}><Link to={`/u/${user}/${repo.name}`}>{repo.full_name}</Link></li>)
-    return <ul>{list}</ul>
+    let list
+    if (!repos) {
+      list = <div>Loading...</div>
+    } else {
+      list = repos.map(repo => (
+        <li key={repo.id}>
+          <Link to={`/u/${user}/${repo.name}`}>{repo.full_name}</Link>
+        </li>
+      ))
+      list = <ul className="list-unstyled">{list}</ul>
+    }
+    return (
+      <div>
+        <h1>Repositories</h1>
+        {list}
+      </div>
+    )
   }
 }
 

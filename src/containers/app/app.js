@@ -6,11 +6,15 @@ import UserRepos from '../user_repos'
 import Repo from '../repo'
 
 const App = () => (
-  <main>
-    <Route exact path="/" component={Home} />
-    <Route path="/u/:user" component={User} />
-    <Route exact path="/u/:user" component={UserRepos} />
-    <Route exact path="/u/:user/:repo" component={Repo} />
+  <main className="my-5 row">
+    <div className="col">
+      <Route exact path="/" component={Home} />
+      <Route path="/u/:user" component={User} />
+    </div>
+    <div className="col">
+      <Route exact path="/u/:user" component={UserRepos} />
+      <Route exact path="/u/:user/:repo" component={Repo} />
+    </div>
   </main>
 )
 

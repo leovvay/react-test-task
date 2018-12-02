@@ -7,24 +7,20 @@ const Home = ({ history }) => {
   let input
 
   return (
-    <div>
-      <h1>Choose user</h1>
-      <form onSubmit={e => {
-          e.preventDefault()
-          if (!input.value.trim()) {
-            return
-          }
-          history.push('/u/'+input.value)
-        }}
-      >
-        <input
-          ref={node => {
-            input = node
-          }}
-        />
-        <button type="submit">Find</button>
-      </form>
-    </div>
+    <form className="form-inline" onSubmit={e => {
+        e.preventDefault()
+        if (!input.value.trim()) {
+          return
+        }
+        history.push('/u/'+input.value)
+      }}
+    >
+      <div className="form-group mx-sm-3">
+        <input className="form-control" placeholder="GitHub nickname"
+          ref={node => input = node} />
+      </div>
+      <button type="submit" className="btn btn-primary">Find</button>
+    </form>
   )
 }
 

@@ -4,16 +4,24 @@ import PropTypes from 'prop-types'
 const User = ({ user }) => {  
   if (!user)
     return <div>Loading user...</div>
-  
-  const email = user.email || "Unknown"
 
   return (
     <div>
-      <h1>{user.login}</h1>
-      <div>Name: {user.name}</div>
-      <div>Email: {email}</div>
-      <div>Location: {user.location}</div>
-      <div>Followers: {user.followers}</div>
+      <img className="img-thumbnail" src={user.avatar_url} width="230" height="230" />
+      <h2>
+        {user.name}<br />
+        <small className="text-muted">{user.login}</small>
+      </h2>
+      <dl className="row">
+        {user.email && <dt className="col-sm-2">Email</dt>}
+        {user.email && <dt className="col-sm-10">{user.email}</dt>}
+
+        {user.location && <dt className="col-sm-2">Location</dt>}
+        {user.location && <dt className="col-sm-10">{user.location}</dt>}
+
+        <dt className="col-sm-2">Followers</dt>
+        <dd className="col-sm-10">{user.followers}</dd>
+      </dl>
     </div>
   )
 }

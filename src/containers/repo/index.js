@@ -20,12 +20,23 @@ class Repo extends React.Component {
 
     return (
       <div>
-        <h1>{repo.full_name}</h1>
-        <div>Description: {repo.description}</div>
-        <div>Forks: {repo.forks_count}</div>
-        <div>Stars: {repo.stargazers_count}</div>
-        <div>Issues: {repo.open_issues}</div>
-        <div>PRs: {pulls}</div>
+        <h3>
+          {repo.full_name}<br />
+          <small className="text-muted">{repo.description}</small>
+        </h3>
+        <dl className="row">
+          <dt className="col-sm-2">Forks</dt>
+          <dd className="col-sm-10">{repo.forks_count}</dd>
+
+          <dt className="col-sm-2">Stars</dt>
+          <dd className="col-sm-10">{repo.stargazers_count}</dd>
+
+          <dt className="col-sm-2">Issues</dt>
+          <dd className="col-sm-10">{repo.open_issues}</dd>
+
+          <dt className="col-sm-2">PRs</dt>
+          <dd className="col-sm-10">{pulls}</dd>
+        </dl>
       </div>
     )
   }
