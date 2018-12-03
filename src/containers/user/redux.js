@@ -6,22 +6,25 @@ export const loadUser = () => ({
     type: LOAD_USER,
 })
 
-export const gotUser = info => ({
+export const gotUser = (user, info) => ({
     type: GOT_USER,
+    user,
     info,
 })
 
-export const errUser = err => ({
+export const errUser = (user, err) => ({
     type: ERR_USER,
+    user,
     err,
 })
 
 export const userReducer = (state = null, action) => {
   switch (action.type) {
     case GOT_USER:
-      state = {data: action.info}
+      return {user: action.user, data: action.info}
     case ERR_USER:
-      state = {err: action.err}
+      return {user: action.user, err: action.err}
+    default:
+      return state
   }
-  return state
 }

@@ -7,10 +7,12 @@ import UserRepos from '../user_repos'
 import Repo from '../repo'
 
 class ReposBrowser extends React.Component {  
-  componentWillMount() {
+  componentDidMount() {
     const user = this.props.match.params.user
-    if (this.props.usersRepos && this.props.usersRepos.data !== undefined)
-      return
+    if (this.props.repos && this.props.repos.data !== undefined &&
+      this.props.repos.user == user) {
+        return
+    }
 
     let isOK = false
     this.props.dispatch(loadUserRepos())
@@ -22,11 +24,11 @@ class ReposBrowser extends React.Component {
       .then(res => {
         if (!isOK)
           throw new Error(JSON.stringify(res))
-        this.props.dispatch(gotUserRepos(res))
+        this.props.dispatch(gotUserRepos(user, res))
       })
       .catch(err => {
         err = `Error when trying to get user repositories: ${err}`
-        this.props.dispatch(errUserRepos(err))
+        this.props.dispatch(errUserRepos(user, err))
       })
   }
 
@@ -43,6 +45,13 @@ class ReposBrowser extends React.Component {
 ReposBrowser.propTypes = {
   match: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  repos: PropTypes.object,
 }
 
-export default withRouter(connect()(ReposBrowser))
+const mapStateToProps = state => ({
+  repos: state.userRepos,
+})
+
+export default withRouter(connect(
+  mapStateToProps,
+)(ReposBrowser))

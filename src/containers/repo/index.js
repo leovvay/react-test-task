@@ -3,15 +3,17 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { loadRepoPulls, gotRepoPulls, errRepoPulls } from './redux'
-import '../../components/ErrorMessage'
 import ErrorMessage from '../../components/ErrorMessage';
 
 class Repo extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const params = this.props.match.params
     const pulls = this.props.reposPulls[params.repo]
-    if (pulls && pulls.data !== undefined)
-      return
+    if (pulls && pulls.data !== undefined &&
+      pulls.user == params.user) {
+        return
+    }
+
     let isOK = false
     this.props.dispatch(loadRepoPulls(params.repo))
     fetch(`https://api.github.com/repos/${params.user}/${params.repo}/pulls`)
@@ -22,11 +24,11 @@ class Repo extends React.Component {
       .then(res => {
         if (!isOK)
           throw new Error(JSON.stringify(res))
-        this.props.dispatch(gotRepoPulls(params.repo, res))
+        this.props.dispatch(gotRepoPulls(params.user, params.repo, res.length))
       })
       .catch(err => {
         err = `Error when trying to get repository PRs: ${err}`
-        this.props.dispatch(errRepoPulls(params.repo, err))
+        this.props.dispatch(errRepoPulls(params.user, params.repo, err))
       })
   }
 

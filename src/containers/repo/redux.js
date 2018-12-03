@@ -7,14 +7,16 @@ export const loadRepoPulls = repo => ({
     repo,
 })
 
-export const gotRepoPulls = (repo, pulls) => ({
+export const gotRepoPulls = (user, repo, pulls) => ({
     type: GOT_REPO_PULLS,
+    user,
     repo,
     pulls,
 })
 
-export const errRepoPulls = (repo, err) => ({
+export const errRepoPulls = (user, repo, err) => ({
     type: ERR_REPO_PULLS,
+    user,
     repo,
     err,
 })
@@ -22,18 +24,18 @@ export const errRepoPulls = (repo, err) => ({
 export const reposPullsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_REPO_PULLS:
-      state = Object.assign({}, state, {
+      return Object.assign({}, state, {
         [action.repo]: null
       })
-    case ERR_REPO_PULLS:
     case GOT_REPO_PULLS:
-      state = Object.assign({}, state, {
-        [action.repo]: {data: action.pulls}
-      })  
+      return Object.assign({}, state, {
+        [action.repo]: {user: action.user, data: action.pulls}
+      }) 
     case ERR_REPO_PULLS:
-      state = Object.assign({}, state, {
-        [action.repo]: {err: action.err}
-      })  
+      return Object.assign({}, state, {
+        [action.repo]: {user: action.user, err: action.err}
+      })
+    default:
+      return state
   }
-  return state
 }

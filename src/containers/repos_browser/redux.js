@@ -6,22 +6,25 @@ export const loadUserRepos = () => ({
     type: LOAD_USER_REPOS,
 })
 
-export const gotUserRepos = repos => ({
+export const gotUserRepos = (user, repos) => ({
     type: GOT_USER_REPOS,
+    user,
     repos,
 })
 
-export const errUserRepos = err => ({
+export const errUserRepos = (user, err) => ({
     type: ERR_USER_REPOS,
+    user,
     err,
 })
 
 export const userReposReducer = (state = null, action) => {
   switch (action.type) {
     case GOT_USER_REPOS:
-      state = {data: action.repos}
+      return {user: action.user, data: action.repos}
     case ERR_USER_REPOS:
-      state = {err: action.err}
+      return {user: action.user, err: action.err}
+    default:
+      return state
   }
-  return state
 }

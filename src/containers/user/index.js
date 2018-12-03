@@ -5,11 +5,13 @@ import { withRouter } from 'react-router-dom'
 import { loadUser, gotUser, errUser } from './redux'
 import UserInfo from '../../components/UserInfo'
 
-class User extends React.Component {  
-  componentWillMount() {
+class User extends React.Component {
+  componentDidMount() {
     const user = this.props.match.params.user
-    if (this.props.user && this.props.user.data !== undefined)
-      return
+    if (this.props.user && this.props.user.data !== undefined &&
+      this.props.user.user == user) {
+        return
+    }
 
     let isOK = false
     this.props.dispatch(loadUser())
@@ -21,17 +23,16 @@ class User extends React.Component {
       .then(res => {
         if (!isOK)
           throw new Error(JSON.stringify(res))
-        this.props.dispatch(gotUser(res))
+        this.props.dispatch(gotUser(user, res))
       })
       .catch(err => {
         err = `Error when trying to get user info: ${err}`
-        this.props.dispatch(errUser(err))
+        this.props.dispatch(errUser(user, err))
       })
   }
 
   render() {
     const user = this.props.match.params.user
-
     return (
       <div>
         <UserInfo user={this.props.user} name={user} />
