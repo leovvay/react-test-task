@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 const Home = ({ history }) => {  
@@ -28,10 +27,4 @@ Home.propTypes = {
   history: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = state => ({
-  user: state.user,
-})
-
-export default withRouter(connect(
-  mapStateToProps,
-)(Home))
+export default withRouter(Home)

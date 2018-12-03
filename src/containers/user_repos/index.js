@@ -2,47 +2,39 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { gotUserRepos } from './redux'
+import ErrorMessage from '../../components/ErrorMessage';
 
-class UserRepos extends React.Component {  
-  componentWillMount() {
-    const user = this.props.match.params.user
-    fetch(`https://api.github.com/users/${user}/repos`)
-      .then(res => res.json())
-      .then(repos => this.props.dispatch(gotUserRepos(repos)))
+const UserRepos = ({match, repos}) => {
+  const user = match.params.user
+  let reposRender
+  if (!repos)
+    reposRender = 'Loading...'
+  else if (repos.err)
+    reposRender = <ErrorMessage err={repos.err} />
+  else {
+    reposRender = repos.data.map(repo => (
+      <li key={repo.id}>
+        <Link to={`/u/${user}/${repo.name}`}>{repo.full_name}</Link>
+      </li>
+    ))
+    reposRender = <ul className="list-unstyled">{reposRender}</ul>
   }
 
-  render() {
-    const repos = this.props.userRepos
-    const user = this.props.match.params.user
-    let list
-    if (!repos) {
-      list = <div>Loading...</div>
-    } else {
-      list = repos.map(repo => (
-        <li key={repo.id}>
-          <Link to={`/u/${user}/${repo.name}`}>{repo.full_name}</Link>
-        </li>
-      ))
-      list = <ul className="list-unstyled">{list}</ul>
-    }
-    return (
-      <div>
-        <h1>Repositories</h1>
-        {list}
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h1>Repositories</h1>
+      {reposRender}
+    </div>
+  )
 }
 
 UserRepos.propTypes = {
   match: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  userRepos: PropTypes.array.isRequired,
+  repos: PropTypes.object,
 }
 
 const mapStateToProps = state => ({
-  userRepos: state.userRepos,
+  repos: state.userRepos,
 })
 
 export default withRouter(connect(
