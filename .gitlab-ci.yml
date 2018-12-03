@@ -10,7 +10,7 @@ before_script:
 pages:
   stage: deploy
   script:
-    - npm run build
+    - npm run build -- --env.basename=/react-test-task
   artifacts:
     paths:
       - public
