@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Route } from 'react-router-dom'
 import { loadUserRepos, gotUserRepos, errUserRepos } from './redux'
-import UserRepos from '../user_repos'
+import Repos from '../repos'
 import Repo from '../repo'
 
 class ReposBrowser extends React.Component {  
@@ -35,7 +35,7 @@ class ReposBrowser extends React.Component {
   render() {
     return (
       <div>
-        <Route exact path="/u/:user" component={UserRepos} />
+        <Route exact path="/u/:user" component={Repos} />
         <Route exact path="/u/:user/:repo" component={Repo} />        
       </div>
     )

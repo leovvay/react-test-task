@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import ErrorMessage from '../../components/ErrorMessage';
 
-const UserRepos = ({match, repos}) => {
+const Repos = ({match, repos}) => {
   const user = match.params.user
   let reposRender
   if (!repos)
@@ -28,7 +28,7 @@ const UserRepos = ({match, repos}) => {
   )
 }
 
-UserRepos.propTypes = {
+Repos.propTypes = {
   match: PropTypes.object.isRequired,
   repos: PropTypes.object,
 }
@@ -39,4 +39,4 @@ const mapStateToProps = state => ({
 
 export default withRouter(connect(
   mapStateToProps,
-)(UserRepos))
+)(Repos))

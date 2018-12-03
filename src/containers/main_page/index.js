@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 
-const Home = ({ history }) => {  
+const MainPage = ({ history }) => {  
   let input
 
   return (
@@ -23,8 +23,8 @@ const Home = ({ history }) => {
   )
 }
 
-Home.propTypes = {
+MainPage.propTypes = {
   history: PropTypes.object.isRequired,
 }
 
-export default withRouter(Home)
+export default withRouter(MainPage)
