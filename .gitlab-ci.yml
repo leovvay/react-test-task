@@ -1,4 +1,4 @@
-image: node:7.9.0
+image: node:10
 
 cache:
   paths:
@@ -7,17 +7,10 @@ cache:
 before_script:
   - npm install
 
-test:
-  stage: test
-  script:
-    - CI=true npm test
-
 pages:
   stage: deploy
   script:
-    - CI=true npm run build
-    - rm -rf public
-    - mv build public
+    - npm run build
   artifacts:
     paths:
       - public
