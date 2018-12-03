@@ -1,6 +1,6 @@
-const LOAD_REPO_PULLS = 'app/home/LOAD_REPO_PULLS';
-const GOT_REPO_PULLS = 'app/home/GOT_REPO_PULLS';
-const ERR_REPO_PULLS = 'app/home/ERR_REPO_PULLS';
+export const LOAD_REPO_PULLS = 'app/home/LOAD_REPO_PULLS';
+export const GOT_REPO_PULLS = 'app/home/GOT_REPO_PULLS';
+export const ERR_REPO_PULLS = 'app/home/ERR_REPO_PULLS';
 
 export const loadRepoPulls = repo => ({
     type: LOAD_REPO_PULLS,
