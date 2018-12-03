@@ -14,10 +14,10 @@ const User = ({ user }) => {
       </h2>
       <dl className="row">
         {user.email && <dt className="col-sm-2">Email</dt>}
-        {user.email && <dt className="col-sm-10">{user.email}</dt>}
+        {user.email && <dd className="col-sm-10">{user.email}</dd>}
 
         {user.location && <dt className="col-sm-2">Location</dt>}
-        {user.location && <dt className="col-sm-10">{user.location}</dt>}
+        {user.location && <dd className="col-sm-10">{user.location}</dd>}
 
         <dt className="col-sm-2">Followers</dt>
         <dd className="col-sm-10">{user.followers}</dd>
