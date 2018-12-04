@@ -14,4 +14,6 @@ const UserPage = () => (
   </div>
 )
 
+export { UserPage }
+
 export default UserPage
