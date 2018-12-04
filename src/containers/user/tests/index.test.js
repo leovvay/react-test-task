@@ -19,7 +19,7 @@ describe('container', () => {
 
     const enzymeWrapper = shallow(<User {...props} />)
     expect(props.dispatch.mock.calls.length).toBe(1)
-    expect(enzymeWrapper.find('.user-info > h2').text()).toBe(props.match.params.user)
+    expect(enzymeWrapper.find('.user-info > h2').text()).toContain(props.match.params.user)
     expect(enzymeWrapper.find('.email')).toHaveLength(0)
     expect(enzymeWrapper.find('.location').text()).toBe(props.user.data.location)
     expect(enzymeWrapper.find('.followers').text()).toBe(props.user.data.followers + '')

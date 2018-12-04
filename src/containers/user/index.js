@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { loadUser } from './redux'
 import Loader from '../../components/Loader'
+import BackButton from '../../components/BackButton';
 
 class User extends React.Component {
   componentDidMount() {
@@ -41,7 +42,7 @@ class User extends React.Component {
 
     return (
       <div className="user-info">
-        <h2>{name}</h2>
+        <h2><BackButton to="/" /> {name}</h2>
         {userRender}
       </div>
     )

@@ -37,7 +37,7 @@ describe('container', () => {
     expect(props.dispatch.mock.calls.length).toBe(1)
     expect(enzymeWrapper.find('Loader')).toHaveLength(0)
     expect(enzymeWrapper.find('ErrorMessage')).toHaveLength(0)
-    expect(enzymeWrapper.find('.title').text()).toBe('user/repo')
+    expect(enzymeWrapper.find('.title').text()).toContain('user/repo')
     expect(enzymeWrapper.find('.forks').text()).toBe("13")
     expect(enzymeWrapper.find('.pulls').text()).toBe("12")
   })

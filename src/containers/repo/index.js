@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { loadRepoPulls } from './redux'
 import ErrorMessage from '../../components/ErrorMessage';
 import Loader from '../../components/Loader';
+import BackButton from '../../components/BackButton';
 
 class Repo extends React.Component {
   componentDidMount() {
@@ -57,7 +58,10 @@ class Repo extends React.Component {
 
     return (
       <div className="repo-info">
-        <h3 className="title">{params.user}/{params.repo}</h3>
+        <h3 className="title">
+          <BackButton to={`/u/${params.user}`} />
+          {params.user}/{params.repo}
+        </h3>
         {repoRender}
       </div>
     )
