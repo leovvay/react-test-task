@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
 import store, { history } from './store'
-import App from './containers/app/app'
+import App from './containers/app'
 
 const target = document.querySelector('#root')
 

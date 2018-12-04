@@ -27,4 +27,6 @@ MainPage.propTypes = {
   history: PropTypes.object.isRequired,
 }
 
+export { MainPage }
+
 export default withRouter(MainPage)
