@@ -1,10 +1,10 @@
 {
   "name": "react-test-task",
   "author": "Paul Annekov",
-  "description": "Test task built using React",
+  "description": "Test task built using React/Redux which shows basic GitHub user info",
   "email": "paul.annekov@gmail.com",
   "private": true,
-  "homepage": "TODO",
+  "homepage": "https://gitlab.com/steelrat/react-test-task",
   "scripts": {
     "start": "webpack-dev-server --open --mode development --env.history=browser --config webpack.config.js",
     "build": "webpack --mode production",
