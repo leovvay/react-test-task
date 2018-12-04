@@ -16,3 +16,4 @@ Demo: https://steelrat.gitlab.io/react-test-task.
 - more unit tests to cover other cases
 - e2e tests (at least one 😊)
 - more decomposition: make common UI parts to be components (like `dt`+`dd` or a whole `dl`)
+- JSDoc for code which doesn't explain itself
