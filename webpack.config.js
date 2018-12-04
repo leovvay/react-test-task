@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = env => {
-  env = env||{}
+  env = env || {}
 
   return {
     context: path.resolve(__dirname, 'src'),
@@ -38,4 +38,5 @@ module.exports = env => {
         inject: false,
       })
     ]
-}}
+  }
+}
