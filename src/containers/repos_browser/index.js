@@ -32,6 +32,8 @@ const mapStateToProps = state => ({
   repos: state.userRepos,
 })
 
+export { ReposBrowser }
+
 export default withRouter(connect(
   mapStateToProps,
 )(ReposBrowser))
