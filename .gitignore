@@ -3,3 +3,4 @@ node_modules
 public/all.js
 public/index.html
 .vscode
+additional_tests.js

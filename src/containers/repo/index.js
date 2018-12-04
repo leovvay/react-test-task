@@ -2,34 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { loadRepoPulls, gotRepoPulls, errRepoPulls } from './redux'
+import { loadRepoPulls } from './redux'
 import ErrorMessage from '../../components/ErrorMessage';
+import Loader from '../../components/Loader';
 
 class Repo extends React.Component {
   componentDidMount() {
     const params = this.props.match.params
-    const pulls = this.props.reposPulls[params.repo]
-    if (pulls && pulls.data !== undefined &&
-      pulls.user == params.user) {
-        return
-    }
-
-    let isOK = false
-    this.props.dispatch(loadRepoPulls(params.repo))
-    fetch(`https://api.github.com/repos/${params.user}/${params.repo}/pulls`)
-      .then(res => {
-        isOK = res.ok
-        return res.json()
-      })
-      .then(res => {
-        if (!isOK)
-          throw new Error(JSON.stringify(res))
-        this.props.dispatch(gotRepoPulls(params.user, params.repo, res.length))
-      })
-      .catch(err => {
-        err = `Error when trying to get repository PRs: ${err}`
-        this.props.dispatch(errRepoPulls(params.user, params.repo, err))
-      })
+    this.props.dispatch(loadRepoPulls(params.user, params.repo))
   }
 
   render() {
@@ -37,7 +17,7 @@ class Repo extends React.Component {
     let pulls = this.props.reposPulls[params.repo]
     let pullsRender
     if (!pulls)
-      pullsRender = 'Loading...'
+      pullsRender = <Loader />
     else if (pulls.err)
       pullsRender = <ErrorMessage err={pulls.err} />
     else
@@ -46,29 +26,29 @@ class Repo extends React.Component {
     const repos = this.props.userRepos
     let repoRender
     if (!repos)
-      repoRender = 'Loading...'
+      repoRender = <Loader />
     else if (repos.err)
       repoRender = <ErrorMessage err={repos.err} />
     else {
       const repo = repos.data.find(repo => repo.name == params.repo)
       if (!repo)
-        repoRender = `Unknown repo name: ${params.repo}`
+        repoRender = <ErrorMessage err={`Unknown repo name: ${params.repo}`} />
       else {
         repoRender = (
           <div>
             <h3><small className="text-muted">{repo.description}</small></h3>
             <dl className="row">
               <dt className="col-sm-2">Forks</dt>
-              <dd className="col-sm-10">{repo.forks_count}</dd>
+              <dd className="col-sm-10 forks">{repo.forks_count}</dd>
 
               <dt className="col-sm-2">Stars</dt>
-              <dd className="col-sm-10">{repo.stargazers_count}</dd>
+              <dd className="col-sm-10 stars">{repo.stargazers_count}</dd>
 
               <dt className="col-sm-2">Issues</dt>
-              <dd className="col-sm-10">{repo.open_issues}</dd>
+              <dd className="col-sm-10 issues">{repo.open_issues}</dd>
 
               <dt className="col-sm-2">PRs</dt>
-              <dd className="col-sm-10">{pullsRender}</dd>
+              <dd className="col-sm-10 pulls">{pullsRender}</dd>
             </dl>
           </div>
         )
@@ -76,8 +56,8 @@ class Repo extends React.Component {
     }
 
     return (
-      <div>
-        <h3>{params.user}/{params.repo}</h3>
+      <div className="repo-info">
+        <h3 className="title">{params.user}/{params.repo}</h3>
         {repoRender}
       </div>
     )
@@ -95,6 +75,8 @@ const mapStateToProps = state => ({
   userRepos: state.userRepos,
   reposPulls: state.reposPulls,
 })
+
+export { Repo }
 
 export default withRouter(connect(
   mapStateToProps,

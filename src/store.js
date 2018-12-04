@@ -1,5 +1,6 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { createBrowserHistory, createHashHistory } from 'history'
+import thunk from 'redux-thunk';
 import { userReducer } from './containers/user/redux'
 import { userReposReducer } from './containers/repos_browser/redux'
 import { reposPullsReducer } from './containers/repo/redux'
@@ -14,4 +15,5 @@ export default createStore(
     userRepos: userReposReducer,
     reposPulls: reposPullsReducer,
   }),
+  applyMiddleware(thunk),
 )

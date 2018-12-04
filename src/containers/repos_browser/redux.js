@@ -1,10 +1,7 @@
-const LOAD_USER_REPOS = 'app/home/LOAD_USER_REPOS';
-const GOT_USER_REPOS = 'app/home/GOT_USER_REPOS';
-const ERR_USER_REPOS = 'app/home/ERR_USER_REPOS';
+import { apiFetch } from '../../utils'
 
-export const loadUserRepos = () => ({
-    type: LOAD_USER_REPOS,
-})
+export const GOT_USER_REPOS = 'app/home/GOT_USER_REPOS';
+export const ERR_USER_REPOS = 'app/home/ERR_USER_REPOS';
 
 export const gotUserRepos = (user, repos) => ({
     type: GOT_USER_REPOS,
@@ -27,4 +24,22 @@ export const userReposReducer = (state = null, action) => {
     default:
       return state
   }
+}
+
+export function loadUserRepos(user) {
+  return function (dispatch, getState) {
+    const repos = getState().userRepos
+    if (repos && repos.data !== undefined && repos.user == user) {
+      return
+    }
+
+    return apiFetch({
+      url: `https://api.github.com/users/${user}/repos`,
+      onSuccess: res => dispatch(gotUserRepos(user, res)),
+      onError: err => {
+        err = `Error when trying to get user repositories: ${err}`
+        return dispatch(errUserRepos(user, err))
+      },
+    })
+  };
 }
