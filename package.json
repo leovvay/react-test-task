@@ -10,6 +10,9 @@
     "build": "webpack --mode production",
     "test": "jest"
   },
+  "engines": {
+    "node": ">=8.14.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
