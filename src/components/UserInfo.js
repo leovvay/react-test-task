@@ -16,20 +16,20 @@ const User = ({ name, user }) => {
         <img className="img-thumbnail" src={data.avatar_url} width="230" height="230" />
         <dl className="row">
           {data.email && <dt className="col-sm-2">Email</dt>}
-          {data.email && <dd className="col-sm-10">{data.email}</dd>}
+          {data.email && <dd className="col-sm-10 email">{data.email}</dd>}
 
           {data.location && <dt className="col-sm-2">Location</dt>}
-          {data.location && <dd className="col-sm-10">{data.location}</dd>}
+          {data.location && <dd className="col-sm-10 location">{data.location}</dd>}
 
           <dt className="col-sm-2">Followers</dt>
-          <dd className="col-sm-10">{data.followers}</dd>
+          <dd className="col-sm-10 followers">{data.followers}</dd>
         </dl>
       </div>
     )
   }
 
   return (
-    <div>
+    <div className="user-info">
       <h2>{name}</h2>
       {userRender}
     </div>
