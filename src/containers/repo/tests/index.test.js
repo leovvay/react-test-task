@@ -8,10 +8,12 @@ Enzyme.configure({ adapter: new Adapter() })
 describe('container', () => {
   it('should render full view', () => {
     const props = {
-      match: {params: {
-        user: 'user',
-        repo: 'repo',
-      }},
+      match: {
+        params: {
+          user: 'user',
+          repo: 'repo',
+        }
+      },
       dispatch: jest.fn(),
       reposPulls: {
         repo: {

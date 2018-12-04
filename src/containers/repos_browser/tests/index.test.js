@@ -8,9 +8,11 @@ Enzyme.configure({ adapter: new Adapter() })
 describe('container', () => {
   it('should render full view', () => {
     const props = {
-      match: {params: {
-        user: 'user',
-      }},
+      match: {
+        params: {
+          user: 'user',
+        }
+      },
       dispatch: jest.fn(),
     }
 

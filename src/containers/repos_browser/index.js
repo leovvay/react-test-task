@@ -6,7 +6,7 @@ import { loadUserRepos } from './redux'
 import Repos from '../repos'
 import Repo from '../repo'
 
-class ReposBrowser extends React.Component {  
+class ReposBrowser extends React.Component {
   componentDidMount() {
     const user = this.props.match.params.user
     this.props.dispatch(loadUserRepos(user))
@@ -16,7 +16,7 @@ class ReposBrowser extends React.Component {
     return (
       <div>
         <Route exact path="/u/:user" component={Repos} />
-        <Route exact path="/u/:user/:repo" component={Repo} />        
+        <Route exact path="/u/:user/:repo" component={Repo} />
       </div>
     )
   }

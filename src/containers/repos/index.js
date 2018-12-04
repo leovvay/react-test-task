@@ -5,7 +5,7 @@ import { withRouter, Link } from 'react-router-dom'
 import ErrorMessage from '../../components/ErrorMessage';
 import Loader from '../../components/Loader';
 
-const Repos = ({match, repos}) => {
+const Repos = ({ match, repos }) => {
   const user = match.params.user
   let reposRender
   if (!repos)

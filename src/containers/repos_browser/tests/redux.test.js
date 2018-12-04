@@ -40,7 +40,7 @@ describe('reducer', () => {
     })
 
     expect(
-      redux.userReposReducer({user: 'user1', err: 'err'}, {
+      redux.userReposReducer({ user: 'user1', err: 'err' }, {
         type: redux.GOT_USER_REPOS,
         user: 'user',
         repos: [],
@@ -64,7 +64,7 @@ describe('reducer', () => {
     })
 
     expect(
-      redux.userReposReducer({user: 'user1', data: []}, {
+      redux.userReposReducer({ user: 'user1', data: [] }, {
         type: redux.ERR_USER_REPOS,
         user: 'user',
         err: 'err',
@@ -84,11 +84,11 @@ describe('thunks', () => {
   })
 
   it('should load user repos', async () => {
-    const user = 'user', res = [{result: 'result'}]
+    const user = 'user', res = [{ result: 'result' }]
     utils.apiFetch = jest.fn(({ onSuccess }) => onSuccess(res))
     const dispatch = jest.fn()
     const getState = () => ({})
     await redux.loadUserRepos(user)(dispatch, getState)
-    expect(dispatch).toBeCalledWith({type: redux.GOT_USER_REPOS, user, repos: res})
+    expect(dispatch).toBeCalledWith({ type: redux.GOT_USER_REPOS, user, repos: res })
   })
 })

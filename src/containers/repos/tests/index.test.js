@@ -12,7 +12,7 @@ describe('component', () => {
       name: 'name',
       full_name: 'full_name',
     }
-    const props = {match: {params: {user: 'user'}}, repos: {data: [repo]}}
+    const props = { match: { params: { user: 'user' } }, repos: { data: [repo] } }
 
     const enzymeWrapper = shallow(<Repos {...props} />)
 

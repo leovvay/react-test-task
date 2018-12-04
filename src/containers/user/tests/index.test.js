@@ -8,10 +8,12 @@ Enzyme.configure({ adapter: new Adapter() })
 describe('container', () => {
   it('should render full view', () => {
     const props = {
-      match: {params: {
-        user: 'user',
-      }},
-      user: {data: {location: 'location', followers: 12}},
+      match: {
+        params: {
+          user: 'user',
+        }
+      },
+      user: { data: { location: 'location', followers: 12 } },
       dispatch: jest.fn(),
     }
 
@@ -20,6 +22,6 @@ describe('container', () => {
     expect(enzymeWrapper.find('.user-info > h2').text()).toBe(props.match.params.user)
     expect(enzymeWrapper.find('.email')).toHaveLength(0)
     expect(enzymeWrapper.find('.location').text()).toBe(props.user.data.location)
-    expect(enzymeWrapper.find('.followers').text()).toBe(props.user.data.followers+'')
+    expect(enzymeWrapper.find('.followers').text()).toBe(props.user.data.followers + '')
   })
 })

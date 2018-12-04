@@ -7,7 +7,7 @@ export async function apiFetch({ url, onSuccess, onError }) {
     if (!res.ok)
       throw new Error(JSON.stringify(json))
     return onSuccess(json)
-  } catch(err) {
+  } catch (err) {
     return onError(err)
   }
 }

@@ -45,7 +45,7 @@ describe('reducer', () => {
     })
 
     expect(
-      redux.reposPullsReducer({repo1: null}, {
+      redux.reposPullsReducer({ repo1: null }, {
         type: redux.GOT_REPO_PULLS,
         user: 'user',
         repo: 'repo',
@@ -76,7 +76,7 @@ describe('reducer', () => {
     })
 
     expect(
-      redux.reposPullsReducer({repo1: null}, {
+      redux.reposPullsReducer({ repo1: null }, {
         type: redux.ERR_REPO_PULLS,
         user: 'user',
         repo: 'repo',
@@ -103,8 +103,8 @@ describe('thunks', () => {
     const user = 'user', repo = 'repo', res = 12
     utils.apiFetch = jest.fn(({ onSuccess }) => onSuccess(res))
     const dispatch = jest.fn()
-    const getState = () => ({reposPulls: {}})
+    const getState = () => ({ reposPulls: {} })
     await redux.loadRepoPulls(user, repo)(dispatch, getState)
-    expect(dispatch).toBeCalledWith({type: redux.GOT_REPO_PULLS, user, repo, pulls: res.length})
+    expect(dispatch).toBeCalledWith({ type: redux.GOT_REPO_PULLS, user, repo, pulls: res.length })
   })
 })

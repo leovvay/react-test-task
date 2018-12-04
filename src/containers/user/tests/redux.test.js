@@ -40,7 +40,7 @@ describe('reducer', () => {
     })
 
     expect(
-      redux.userReducer({user: 'user1', err: 'err'}, {
+      redux.userReducer({ user: 'user1', err: 'err' }, {
         type: redux.GOT_USER,
         user: 'user',
         info: {},
@@ -64,7 +64,7 @@ describe('reducer', () => {
     })
 
     expect(
-      redux.userReducer({user: 'user1', data: {}}, {
+      redux.userReducer({ user: 'user1', data: {} }, {
         type: redux.ERR_USER,
         user: 'user',
         err: 'err',
@@ -84,11 +84,11 @@ describe('thunks', () => {
   })
 
   it('should load user', async () => {
-    const user = 'user', res = {result: 'result'}
+    const user = 'user', res = { result: 'result' }
     utils.apiFetch = jest.fn(({ onSuccess }) => onSuccess(res))
     const dispatch = jest.fn()
     const getState = () => ({})
     await redux.loadUser(user)(dispatch, getState)
-    expect(dispatch).toBeCalledWith({type: redux.GOT_USER, user, info: res})
+    expect(dispatch).toBeCalledWith({ type: redux.GOT_USER, user, info: res })
   })
 })

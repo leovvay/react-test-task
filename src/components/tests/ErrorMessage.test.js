@@ -7,7 +7,7 @@ Enzyme.configure({ adapter: new Adapter() })
 
 describe('component', () => {
   it('should render full view', () => {
-    const props = {err: 'err'}
+    const props = { err: 'err' }
 
     const enzymeWrapper = shallow(<ErrorMessage {...props} />)
 
