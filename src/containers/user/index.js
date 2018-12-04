@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { loadUser } from './redux'
 import Loader from '../../components/Loader'
 import BackButton from '../../components/BackButton';
+import ErrorMessage from '../../components/ErrorMessage';
 
 class User extends React.Component {
   componentDidMount() {
